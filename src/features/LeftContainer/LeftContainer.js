@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentChatId, createNewChatSession } from '../Chat/ChatSlice';
+import { setCurrentChatId, createNewChatSession, deleteChatSession } from '../Chat/ChatSlice';
 
 function SideContainer() {
   const chats = useSelector((state) => state.chat.chats);
@@ -15,6 +15,11 @@ function SideContainer() {
     dispatch(createNewChatSession());
   };
 
+  const handleDeleteChatSession = (chatId, e) => {
+    e.stopPropagation();
+    dispatch(deleteChatSession(chatId));
+  };
+
   return (
     <div id="side-container">
       <div id="chat-session-heading">Chat Sessions</div>
@@ -27,15 +32,21 @@ function SideContainer() {
       </button>
       <div id="chat-sessions">
         {Object.keys(chats).map((chatId) => (
-          <button
-            key={chatId}
-            className={`chat-session-button ${
-              chatId === currentChatId ? 'active' : ''
-            }`}
-            onClick={() => handleSwitchChat(chatId)}
-          >
-            Chat Session {chatId}
-          </button>
+          <div key={chatId} className="chat-session-wrapper">
+            <button
+              className={`chat-session-button ${chatId === currentChatId ? 'active' : ''
+                }`}
+              onClick={() => handleSwitchChat(chatId)}
+            >
+              Chat Session {chatId}
+              <button
+                className="delete-chat-session-button"
+                onClick={(e) => handleDeleteChatSession(chatId, e)}
+              >
+                X
+              </button>
+            </button>
+          </div>
         ))}
       </div>
     </div>

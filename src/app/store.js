@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import apiReducer from '../features/Header/HeaderSlice';
 import chatReducer from '../features/Chat/ChatSlice';
-import footerReducer from '../features/Footer/FooterSlice';
+import footerReducer from '../features/ChatInput/ChatInputSlice';
 
 export const store = configureStore({
   reducer: {

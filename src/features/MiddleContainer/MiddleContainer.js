@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Footer from '../ChatInput/ChatInput';
 import Chat from '../Chat/Chat';
 
 function MiddleContainer() {

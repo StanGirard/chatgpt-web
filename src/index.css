@@ -288,3 +288,25 @@ code {
 .button-tab {
   margin-right: 8px;
 }
+
+.chat-session-wrapper {
+  position: relative;
+}
+
+.delete-chat-session-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  font-size: 12px;
+  background-color: rgba(255, 0, 0, 0.5);
+  color: #eee;
+  cursor: pointer;
+  border-radius: 0 5px 0 5px;
+  border: none;
+  outline: none;
+}
+
+.delete-chat-session-button:hover {
+  background-color: rgba(255, 0, 0, 0.7);
+}

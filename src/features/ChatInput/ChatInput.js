@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserInput } from './FooterSlice';
+import { setUserInput } from './ChatInputSlice';
 import { setMessages } from '../Chat/ChatSlice';
 import useOpenAI from '../../hooks/OpenAI/openAI';
 
@@ -17,7 +17,7 @@ function Footer() {
   const handleSendMessage = async (message) => {
     let updatedMessages = [...messagesRef.current, { role: 'user', content: message }];
     dispatch(setUserInput(''));
-    dispatch(setMessages({ chatId: 1, messages: updatedMessages }));
+    dispatch(setMessages({ chatId: chatId, messages: updatedMessages }));
   
     await createChatCompletion('gpt-3.5-turbo', updatedMessages, (response) => {
       if (response) {
@@ -32,7 +32,7 @@ function Footer() {
           };
           newMessages[newMessages.length - 1] = updatedLastMessage;
         }
-        dispatch(setMessages({ chatId: 1, messages: newMessages }));
+        dispatch(setMessages({ chatId: chatId, messages: newMessages }));
       }
     });
   };
