@@ -1,13 +1,290 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+
 body {
+  font-family: 'Arial', sans-serif;
+  background-color: #111;
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+}
+
+#app-container {
+  background-color: #222;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#model-select {
+  width: 50%;
+}
+
+#api-key-input,
+#user-input {
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+  color: #eee;
+  font-size: 16px;
+  padding: 5px;
+  outline: none;
+}
+
+.button-green {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  color: #eee;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px 10px;
+  outline: none;
+}
+
+.button-green:hover {
+  background-color: #45a049;
+}
+
+#chat-messages {
+  display: block;
+  width: 100%;
+  overflow-y: auto;
+  height: 500px;
+}
+
+#chat-container {
+  background-color: #333;
+  border-radius: 5px;
+  flex-grow: 1;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+#user-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.message-content-wrapper {
+  display: block;
+}
+
+.message-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+#footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#side-container {
+  background-color: #222;
+  border-radius: 10px;
+  padding: 20px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  margin-right: 20px;
+}
+
+#chat-sessions,
+#prompts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+  overflow-y: auto;
+  max-height: 80%;
+}
+
+#chat-sessions button,
+#prompts button {
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+  color: #eee;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  outline: none;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#chat-sessions button:hover,
+#prompts button:hover {
+  background-color: #444;
+}
+
+#prompt-heading,
+#chat-session-heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#right-container-prompt {
+  background-color: #222;
+  border-radius: 10px;
+  padding: 20px;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  margin-left: 20px;
+}
+
+/* Layout */
+body {
+  display: flex;
+  flex-direction: row;
+}
+
+#side-container,
+#app-container,
+#right-container-prompt {
+  margin: 20px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-color: #333;
+  border: 1px solid #444;
+  font-size: 14px;
+  font-family: Consolas, Monaco, Menlo, 'Ubuntu Mono', 'Liberation Mono', monospace;
+  padding: 5px;
+  margin: 10px 0;
+  display: block;
+  white-space: pre-wrap;
+  color: #eee;
+}
+
+.delete-icon {
+  font-size: 12px;
+  color: #aaa;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+
+
+.prompt-list-item {
+  list-style: none;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.prompt-name {
+  font-weight: bold;
+  color: #eee;
+}
+
+.prompt-description {
+  display: none;
+  position: absolute;
+  left: 0%;
+  top: 100%;
+  background-color: #444;
+  color: #fff;
+  padding: 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  margin-left: 8px;
+  z-index: 100;
+  font-size: 14px;
+  min-width: 150px; /* Add this line */
+  max-width: 300px; /* Add this line */
+}
+
+.prompt-list-item:hover .prompt-description {
+  display: block;
+}
+
+.tab {
+  overflow: hidden;
+  border-bottom: 1px solid #333;
+  margin-bottom: 10px;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #eee;
+}
+
+.tab button:hover {
+  background-color: #444;
+}
+
+.tab button.active {
+  background-color: #444;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #333;
+  border-top: none;
+}
+
+.rootcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#prompt-tabs {
+  display: flex;
+}
+
+.button-tab {
+  margin-right: 8px;
 }
