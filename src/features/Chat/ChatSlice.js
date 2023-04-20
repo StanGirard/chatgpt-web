@@ -5,6 +5,7 @@ const initialState = {
   chats: {
     1: [],
   },
+  currentChatId: 1,
 };
 
 const chatSlice = createSlice({
@@ -15,9 +16,18 @@ const chatSlice = createSlice({
       const { chatId, messages } = action.payload;
       state.chats[chatId] = messages;
     },
-  },
-});
-
-export const { setMessages } = chatSlice.actions;
+    setCurrentChatId: (state, action) => {
+        state.currentChatId = action.payload;
+      },
+      createNewChatSession: (state) => {
+        const newChatId = Math.max(...Object.keys(state.chats)) + 1;
+        state.chats[newChatId] = [];
+        state.currentChatId = newChatId;
+      },
+    },
+  });
+  
+export const { setMessages, setCurrentChatId, createNewChatSession } = chatSlice.actions;
+  
 
 export default chatSlice.reducer;

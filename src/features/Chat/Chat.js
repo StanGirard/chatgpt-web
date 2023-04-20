@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 const Chat = () => {
   const chats = useSelector((state) => state.chat.chats);
-  const chatId = 1; // Change this to the desired chatId
+  const chatId = useSelector((state) => state.chat.currentChatId);
   const messages = chats[chatId];
 
   return (

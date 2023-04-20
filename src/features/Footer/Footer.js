@@ -6,7 +6,7 @@ import useOpenAI from '../../hooks/OpenAI/openAI';
 
 function Footer() {
   const userInput = useSelector((state) => state.footer.userInput);
-  const chatId = 1;
+  const chatId = useSelector((state) => state.chat.currentChatId);
   const messages = useSelector((state) => state.chat.chats[chatId] || []);
   const dispatch = useDispatch();
   const { createChatCompletion } = useOpenAI();
