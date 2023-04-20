@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  messages: [],
+  // Map of chatId to messages
+  chats: {
+    1: [],
+  },
 };
 
 const chatSlice = createSlice({
@@ -9,7 +12,8 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     setMessages: (state, action) => {
-      state.messages = action.payload;
+      const { chatId, messages } = action.payload;
+      state.chats[chatId] = messages;
     },
   },
 });

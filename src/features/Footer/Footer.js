@@ -6,7 +6,8 @@ import useOpenAI from '../../hooks/OpenAI/openAI';
 
 function Footer() {
   const userInput = useSelector((state) => state.footer.userInput);
-  const messages = useSelector((state) => state.chat.messages);
+  const chatId = 1;
+  const messages = useSelector((state) => state.chat.chats[chatId] || []);
   const dispatch = useDispatch();
   const { createChatCompletion } = useOpenAI();
 
@@ -14,13 +15,9 @@ function Footer() {
   messagesRef.current = messages;
 
   const handleSendMessage = async (message) => {
-    let updatedMessages = [...messages, { role: 'user', content: message }];
+    let updatedMessages = [...messagesRef.current, { role: 'user', content: message }];
     dispatch(setUserInput(''));
-    dispatch(setMessages(updatedMessages));
-  
-    if (updatedMessages.length === 1) {
-      updatedMessages = [{ role: 'user', content: message }];
-    }
+    dispatch(setMessages({ chatId: 1, messages: updatedMessages }));
   
     await createChatCompletion('gpt-3.5-turbo', updatedMessages, (response) => {
       if (response) {
@@ -35,9 +32,17 @@ function Footer() {
           };
           newMessages[newMessages.length - 1] = updatedLastMessage;
         }
-        dispatch(setMessages(newMessages));
+        dispatch(setMessages({ chatId: 1, messages: newMessages }));
       }
     });
+  };
+  
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSendMessage(userInput);
+    }
   };
 
   return (
@@ -48,6 +53,7 @@ function Footer() {
         placeholder="Type your message..."
         value={userInput}
         onChange={(e) => dispatch(setUserInput(e.target.value))}
+        onKeyPress={handleKeyPress}
       ></textarea>
       <button id="send-button" className="button-green" onClick={() => handleSendMessage(userInput)}>
         Send

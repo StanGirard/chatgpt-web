@@ -1,22 +1,20 @@
-// Chat.js
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-
-
 const Chat = () => {
-  const messages = useSelector((state) => state.chat.messages);
+  const chats = useSelector((state) => state.chat.chats);
+  const chatId = 1; // Change this to the desired chatId
+  const messages = chats[chatId];
 
   return (
     <div id="chat-container">
-       {messages.map((message, index) => (
-        <div key={index} className="message">
-          <div className="message-sender">{message.sender}</div>
-          <div className="message-content">{message.content}</div>
+      {messages.map((message, index) => (
+        <div key={index}>
+          <div>{message.role}</div>
+          <div>{message.content}</div>
         </div>
-
-        ))}
-      </div>
+      ))}
+    </div>
   );
 };
 
